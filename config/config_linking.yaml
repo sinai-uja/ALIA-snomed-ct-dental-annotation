@@ -1,0 +1,50 @@
+# ============================================================
+# Configuration of the Hybrid Entity Linking Pipeline (RRF)
+# ============================================================
+
+# --- Paths ---
+paths:
+  ner_model:    "./models/MrBERT-es-ner_model_entity_ampere-8192_length"
+  embed_model:  "./models/MrBERT-es-ner_model_entity_ampere-8192_length"
+  kb_csv:       "./data/snomed_enriched.csv"
+  input_jsonl:  "./data/test.jsonl"
+  output_jsonl: "./output/linking_output_desc.jsonl"
+  embeddings_cache: "./embedding_cache_desc"
+  index_name: "snomed_hybrid_v1"
+
+# --- CSV Columns ---
+kb:
+  text_col: "texto"    # column with the textual description
+  code_col: "codigo"   # column with the code (e.g. SNOMED CT)
+  csv_sep: ","         # separator of the KB CSV
+  def_col: "description"
+  syn_col: "synonyms"
+
+# --- Hybrid Search ---
+search:
+  top_k: 5                   # maximum number of candidates returned at the end
+  
+  # Semantic Parameters
+  semantic_threshold: 0.75   # minimum cosine similarity for the embedding model
+  context_alpha: 0.9         # weight of the entity embedding (90%)
+  context_beta: 0.1          # weight of the context window embedding (10%)
+  context_window: 256        # characters (NOT tokens) on each side of the mention
+  
+  # Lexical Parameters (TF-IDF char_wb)
+  lexical_threshold: 0.10    # minimum cosine similarity to accept spelling match
+  
+  # Fusion Parameters (RRF)
+  rrf_k: 60                  # ranking smoothing (60 is standard in RRF)
+  hybrid_pool_factor: 10     # retrieves top_k * 10 from each side before merging
+
+# --- Inference ---
+inference:
+  batch_size_ner:   16
+  batch_size_embed: 16
+  max_length:       8192
+
+# --- Misc ---
+misc:
+  device: "auto"
+  demo:   false
+  demo_text: "El paciente presenta estenosis aórtica severa y fibrilación auricular."

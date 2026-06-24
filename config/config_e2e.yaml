@@ -1,0 +1,17 @@
+# ============================================================
+# Configuration for NER Model Evaluation
+# ============================================================
+
+# --- Paths ---
+paths:
+  ner_model:   "../models/MrBERT-es-ner_model_multiclass_ampere-8192_length"
+  input_jsonl: "../data/test.jsonl"
+
+# --- Inference ---
+inference:
+  batch_size_ner: 32
+  max_length: 8192
+
+# --- Misc ---
+misc:
+  device: "auto"  # "auto", "cuda", "cpu"
