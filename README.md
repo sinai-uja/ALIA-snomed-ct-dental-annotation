@@ -54,6 +54,7 @@ ALIA-snomed-ct-dental-annotation/
 ├── src_e2e/
 │   └── main.py
 ├── requirements.txt
+├── LICENSE
 └── README.md
 ```
 
@@ -158,3 +159,7 @@ Make sure `kb.csv_sep` in `config/config_linking.yaml` matches the file format (
 
 - `src_linking/`: Linking version
 - `src_e2e/`: End-to-end / NER evaluation version
+
+## License
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
