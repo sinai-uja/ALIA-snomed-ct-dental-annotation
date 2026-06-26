@@ -12,6 +12,12 @@ Project for medical entity extraction (NER) and linking against SNOMED using hyb
 - NER evaluation: `src_e2e/main.py`
 - Configurations in `config/`
 
+## Models
+
+The Hugging Face models used in this project are:
+- **NER**: [SINAI/ALIA-MrBERT-es-snomed-dental-ner-ctx8192](https://huggingface.co/SINAI/ALIA-MrBERT-es-snomed-dental-ner-ctx8192)
+- **NER multiclass**: [SINAI/ALIA-MrBERT-es-snomed-dental-ner-multiclass-ctx8192](https://huggingface.co/SINAI/ALIA-MrBERT-es-snomed-dental-ner-multiclass-ctx8192)
+
 ## Structure
 
 ```text
