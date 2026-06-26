@@ -1,6 +1,7 @@
 # ALIA-snomed-ct-dental-annotation: SNOMED-CT Dental Entity Linking & Annotation
 
 Project for medical entity extraction (NER) and linking against SNOMED using hybrid search:
+
 - semantic (embeddings + FAISS)
 - lexical (TF-IDF)
 - morphological (string similarity)
@@ -19,12 +20,12 @@ This project supports **two alternatives** for Named Entity Recognition (NER), d
 1. **Single-Class NER Alternative (General Entity Detection)**:
    - **Model**: [SINAI/ALIA-MrBERT-es-snomed-dental-ner-ctx8192](https://huggingface.co/SINAI/ALIA-MrBERT-es-snomed-dental-ner-ctx8192) (local folder: `models/MrBERT-es-ner_model_entity_ampere-8192_length/`).
    - **Purpose**: Detects all clinical/dental entities under a single generic class (`ENTITY`).
-   - **Usage**: This is the default alternative configured in the full linking pipeline (`config/config_linking.yaml`). It is optimal for subsequently linking those detected entities to SNOMED CT codes.
+   - **Usage**: This is the default alternative configured in the full linking pipeline (`config/config_e2e.yaml`). It is optimal for subsequently linking those detected entities to SNOMED CT codes.
 
 2. **Multiclass NER Alternative (Detailed Semantic Classification)**:
    - **Model**: [SINAI/ALIA-MrBERT-es-snomed-dental-ner-multiclass-ctx8192](https://huggingface.co/SINAI/ALIA-MrBERT-es-snomed-dental-ner-multiclass-ctx8192) (local folder: `models/MrBERT-es-ner_model_multiclass_ampere-8192_length/`).
    - **Purpose**: Detects clinical/dental entities and classifies them into multiple specific semantic categories.
-   - **Usage**: This alternative is configured in `config/config_e2e.yaml` and is used for evaluating detailed classification performance.
+   - **Usage**: This alternative is configured in `config/config_linking.yaml` and is used for evaluating detailed classification performance.
 
 ## Structure
 
@@ -74,6 +75,7 @@ pip install -r requirements.txt
 File: `config/config_linking.yaml`
 
 Includes:
+
 - model and data paths
 - hybrid search parameters (`semantic_threshold`, `lexical_threshold`, `rrf_k`, etc.)
 - embeddings cache
@@ -83,6 +85,7 @@ Includes:
 File: `config/config_e2e.yaml`
 
 Includes only:
+
 - NER model
 - test dataset
 - NER inference parameters
